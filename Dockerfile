@@ -1,3 +1,3 @@
 FROM tianon/true
-ADD bin/ws-test-01 /
-CMD ["/ws-test-01"]
+COPY bin/ws-test-01 /
+ENTRYPOINT ["/ws-test-01"]
