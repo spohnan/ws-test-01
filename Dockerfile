@@ -1,3 +1,3 @@
-FROM centurylink/ca-certs
-WORKDIR /app
-COPY build.sh /app/
+FROM scratch
+ADD ws-test-01 /
+CMD ["./ws-test-01"]

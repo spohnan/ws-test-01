@@ -1,4 +1,4 @@
-package main
+package main // import "github.com/spohnan/ws-test-01"
 
 import (
 	"github.com/spohnan/ws-test-01/server"
