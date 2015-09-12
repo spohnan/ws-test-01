@@ -1,7 +1,9 @@
 A trivial golang project for me to continue to learn Go and Docker
 
-# build and run tests on local machine
+
+# Build and run tests on local machine
 ./build.sh
 
-# possibly crosscompile and run within container
+# Possibly crosscompile and run within container
+# Build uses static compilation flags so we end up with a ~7.5MB container
 ./dockerize.sh
