@@ -2,11 +2,11 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/spohnan/ws-test-01/meta"
 	"log"
 	"net/http"
-	"fmt"
 )
 
 func InitApi(r *mux.Router) {
@@ -16,7 +16,8 @@ func InitApi(r *mux.Router) {
 	r.HandleFunc("/health", healthHandler)
 	r.HandleFunc("/version", versionHandler)
 
-	//sr := r.PathPrefix("/api/v1").Subrouter()
+	sr := r.PathPrefix("/api/v1").Subrouter()
+	InitHost(sr)
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
