@@ -20,7 +20,7 @@ GIT_COMMIT=$(git rev-parse HEAD)
 GIT_DIRTY=$(test -n "`git status --porcelain`" && echo "+CHANGES" || true)
 
 # Other build information we'll compile into the program
-GO_VERSION=$(go version | sed -e 's/ /_/g')
+
 BUILD_TIMESTAMP=$(date -u +%FT%TZ)
 
 # Install dependencies
@@ -44,7 +44,8 @@ fi
 
 # Build!
 info "--> Building..."
-go build \
-	-ldflags "-X main.GitCommit ${GIT_COMMIT}${GIT_DIRTY} -X main.GolangVersion ${GO_VERSION} -X main.BuildDate ${BUILD_TIMESTAMP}" \
+export GOOS=linux 
+go build -a -tags netgo -installsuffix netgo \
+    -ldflags "-X main.GitCommit=${GIT_COMMIT}${GIT_DIRTY} -X main.BuildDate=${BUILD_TIMESTAMP}" \
     -v \
     -o bin/$OUTPUT_FILE

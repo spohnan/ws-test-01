@@ -1,1 +1,5 @@
 A trivial golang project for me to continue to learn Go and Docker
+
+./build.sh
+docker build -t spohnan/ws-test-01 .
+docker run --rm -it -p 8080:8080 spohnan/ws-test-01

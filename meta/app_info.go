@@ -4,7 +4,6 @@ type AppInfo struct {
 	Version           string
 	VersionPrerelease string
 	GitCommit         string
-	GolangVersion     string
 	BuildDate         string
 }
 

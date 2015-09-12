@@ -1,3 +1,3 @@
-FROM scratch
-ADD ws-test-01 /
-CMD ["./ws-test-01"]
+FROM tianon/true
+ADD bin/ws-test-01 /
+CMD ["/ws-test-01"]
