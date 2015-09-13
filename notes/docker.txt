@@ -1,0 +1,41 @@
+# Running more than one instance directly and then putting haproxy in front to balance
+
+1.) Create the haproxy config file
+
+echo "defaults
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+
+listen stats *:8081
+    mode http
+    stats enable
+    stats uri /haproxy
+
+frontend localnodes
+    bind *:8080
+    mode http
+    default_backend nodes
+
+backend nodes
+    mode http
+    balance roundrobin
+    server c1.andyspohn.com docker:8081 check
+    server c2.andyspohn.com docker:8082 check" > haproxy.cfg
+
+2.) Start multiple containers on different ports
+
+docker run -d -p 8081:8080 -h 'c1.andyspohn.com' spohnan/ws-test-01
+docker run -d -p 8082:8080 -h 'c2.andyspohn.com' spohnan/ws-test-01
+
+3.) Start haproxy
+haproxy -f haproxy.cfg
+
+# View hostname alternation through haproxy
+http://localhost:8080/api/v1/host/
+
+# View haproxy stats
+http://localhost:8081/haproxy
+
+# Stop haproxy and shutdown containers
+docker stop `docker ps | grep ws-test-01 | awk '{print $1}'`

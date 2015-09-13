@@ -1,0 +1,41 @@
+
+1.) Create kube application config file, ws-test-01.yml
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: ws-test-01
+  labels:
+    app: ws-test-01
+spec:
+  replicas: 3
+  selector:
+    name: ws-test-01
+  template:
+    metadata:
+      labels:
+        name: ws-test-01
+    spec:
+      containers:
+      - name: ws-test-01
+        image: spohnan/ws-test-01
+        ports:
+        - containerPort: 8080
+----
+apiVersion: v1
+kind: Service
+metadata:
+  name: ws-test-01
+  labels:
+    name: ws-test-01
+spec:
+  ports:
+    - port: 8080
+  selector:
+    name: ws-test-01
+  type: LoadBalancer
+
+2.) kubectl create -f ./ws-test-01.yml
+3.) Locate LoadBalancer Ingress from services and create CNAME alias
+4.) API is now available from http://ws-test-01-api.andyspohn.com:8080/api/v1/host/
+5.) Scale pods as needed with kubectl scale rc ws-test-01 --replicas=6
