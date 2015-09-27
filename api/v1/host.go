@@ -8,18 +8,19 @@ import (
 	"os"
 )
 
+// InitHost configures the host API endpoint
 func InitHost(r *mux.Router) {
 	sr := r.PathPrefix("/host").Subrouter()
 	sr.HandleFunc("/", getHost).Methods("GET")
 }
 
-type HostInfo struct {
+type hostInfo struct {
 	HostName string
 }
 
 func getHost(w http.ResponseWriter, r *http.Request) {
 	host, err := os.Hostname()
-	hostInfo := &HostInfo{}
+	hostInfo := &hostInfo{}
 	if err == nil {
 		hostInfo.HostName = host
 	} else {

@@ -12,30 +12,32 @@ import (
 	"time"
 )
 
+// Server is a structure that encapsulates all components
 type Server struct {
 	Server *manners.GracefulServer
 	Router *mux.Router
 }
 
-var Srv *Server
+var srv *Server
 
+// Start initializes and starts the web server
 func Start() {
 
-	Srv = &Server{}
-	Srv.Router = mux.NewRouter()
+	srv = &Server{}
+	srv.Router = mux.NewRouter()
 
-	Srv.Server = manners.NewWithServer(&http.Server{
+	srv.Server = manners.NewWithServer(&http.Server{
 		Addr:           ":8080",
-		Handler:        Srv.Router,
+		Handler:        srv.Router,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	})
 
 	log.Printf("Starting Server v%s ...", meta.App.Version)
-	api.InitApi(Srv.Router)
+	api.InitAPI(srv.Router)
 	startShutdownListener()
-	Srv.Server.ListenAndServe()
+	srv.Server.ListenAndServe()
 }
 
 func startShutdownListener() {
@@ -45,7 +47,7 @@ func startShutdownListener() {
 		signal.Notify(sigchan, os.Interrupt, os.Kill)
 		<-sigchan
 		log.Println("Shutting down ...")
-		Srv.Server.Close()
+		srv.Server.Close()
 		log.Println("Stopped")
 	}()
 }

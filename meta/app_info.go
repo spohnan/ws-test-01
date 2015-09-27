@@ -1,14 +1,15 @@
 package meta
 
-type AppInfo struct {
+type appInfo struct {
 	Version           string
 	VersionPrerelease string
 	GitCommit         string
 	BuildDate         string
 }
 
-var App *AppInfo
+// App contains information about the application build
+var App *appInfo
 
 func init() {
-	App = &AppInfo{}
+	App = &appInfo{}
 }

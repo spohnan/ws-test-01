@@ -21,6 +21,7 @@ var GolangVersion string
 // A timestamp when the program was compiled
 var BuildDate string
 
+// InitAppInfo copies all of the linker supplied values into the build info
 func InitAppInfo() {
 	meta.App.Version = Version
 	meta.App.VersionPrerelease = VersionPrerelease

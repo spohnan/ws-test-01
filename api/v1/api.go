@@ -9,7 +9,9 @@ import (
 	"net/http"
 )
 
-func InitApi(r *mux.Router) {
+// InitAPI ensures all endpoints of the API have been
+// configured and initialized
+func InitAPI(r *mux.Router) {
 	log.Println("Initializing API ...")
 
 	r.HandleFunc("/", versionHandler)

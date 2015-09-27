@@ -22,6 +22,7 @@ getdeps:
 	go get github.com/golang/lint/golint
 	go get golang.org/x/tools/cmd/vet
 	glide up
+
 .PHONY: getdeps
 
 fmt: getdeps
@@ -32,19 +33,20 @@ fmt: getdeps
 # golint doens't like the path produced by glide novendor
 lint:
 	@echo "Running $@:"
-	for dir in $(shell glide novendor) ; do \
+	for dir in $(shell export GO15VENDOREXPERIMENT=1; glide novendor) ; do \
 		golint "$$dir"; \
 	done
 .PHONY: lint
 
 vet:
 	@echo "Running $@:"
-	go vet $(shell glide novendor)
+	go vet $(shell export GO15VENDOREXPERIMENT=1; glide novendor)
 .PHONY: vet
 
 test: getdeps
 	@echo "Running $@:"
-	go test -cover $(shell glide novendor)
+	go test -cover $(shell export GO15VENDOREXPERIMENT=1; glide novendor)
+	go test -cover $(glide novendor)
 .PHONY: test
 
 build: clean getdeps fmt lint vet test
