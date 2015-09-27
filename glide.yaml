@@ -1,0 +1,7 @@
+package: github.com/spohnan/ws-test-01
+import:
+  - package: github.com/braintree/manners
+    ref: 0.4.0
+    vcs: git
+  - package: github.com/gorilla/mux
+  - package: github.com/gorilla/context
