@@ -2,8 +2,14 @@
 
 A trivial golang project for me to continue to learn Go and Docker
 
-# Build and run tests on local machine
+Build and run tests on local machine
+------------------------------------
+```
 make run
+```
 
-# Run within a Docker container
+Run within a Docker container
+-----------------------------
+```
 make docker-run
+```
