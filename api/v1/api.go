@@ -20,6 +20,7 @@ func InitAPI(r *mux.Router) {
 
 	sr := r.PathPrefix("/api/v1").Subrouter()
 	InitHost(sr)
+	InitEnv(sr)
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# If a value has been set for the location of consul then run using envconsul
+if [ ! -z $CONSUL ]; then
+    /usr/bin/envconsul -consul=$CONSUL -prefix ws-test-01 /usr/bin/ws-test-01
+fi
