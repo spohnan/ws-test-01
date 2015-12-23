@@ -22,6 +22,7 @@ func InitAPI(r *mux.Router) {
 	InitHash(sr)
 	InitHost(sr)
 	InitEnv(sr)
+	InitSleep(sr)
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
