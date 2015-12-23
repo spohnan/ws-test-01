@@ -19,6 +19,7 @@ func InitAPI(r *mux.Router) {
 	r.HandleFunc("/version", versionHandler)
 
 	sr := r.PathPrefix("/api/v1").Subrouter()
+	InitHash(sr)
 	InitHost(sr)
 	InitEnv(sr)
 }
