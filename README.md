@@ -32,6 +32,11 @@ http://localhost:8080/api/v1/host/ -> {"HostName":"edba47764b7a"}
 http://localhost:8080/health -> OK
 ```
 
+#### Simulate work with a timeout
+```
+http://localhost:8080/sleep/TIMEOUT_IN_MILLIS/
+```
+
 #### Version info
 ```
 http://localhost:8080/version -> {"Version":"1.1.0","VersionPrerelease":"dev","GitCommit":"7ef41aa00898d46e9e063a8389ed972b90d02a2d+CHANGES","BuildDate":"2015-12-17T15:26:42Z"}
